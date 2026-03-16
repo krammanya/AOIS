@@ -5,3 +5,4 @@ pytest.ini/
 htmlcov/
 .coverage/
 *.cover/
+*.pyc
