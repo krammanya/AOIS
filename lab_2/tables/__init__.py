@@ -1,0 +1,3 @@
+from tables.normal_form_builder import NormalFormBuilder
+from tables.truth_table_generator import TruthTableGenerator
+from tables.truth_tables_row import TruthTableRow

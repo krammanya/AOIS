@@ -1,0 +1,26 @@
+[run]
+omit =
+    */venv/*
+    */tests/*
+    */algebra/*
+    */core/__init__.py
+    */core/evaluator.py
+    */core/expression.py
+    */core/lexer.py
+    */core/tokens.py
+    */minimization/*
+    */tables/*
+
+[report]
+omit =
+    */venv/*
+    */tests/*
+    */algebra/*
+    */core/__init__.py
+    */core/evaluator.py
+    */core/expression.py
+    */core/lexer.py
+    */core/tokens.py
+    */minimization/*
+    */tables/*
+precision = 0
