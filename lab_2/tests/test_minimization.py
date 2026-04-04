@@ -106,10 +106,43 @@ def test_karnaugh_method_builds_map_and_both_results(minimization_rows):
     assert "(X,1,1)" in report or "(0,X,0)" in report
 
 
-def test_karnaugh_method_rejects_unsupported_variable_count():
+def test_karnaugh_method_supports_five_variables():
     rows = []
 
     for number in range(32):
+        values = {
+            name: bool((number >> shift) & 1)
+            for shift, name in enumerate(reversed(["a", "b", "c", "d", "e"]))
+        }
+        rows.append(
+            type(
+                "Row",
+                (),
+                {
+                    "variable_values": values,
+                    "intermediate_values": {},
+                    "result": values["e"],
+                },
+            )()
+        )
+
+    report = minimize_karnaugh_method(["a", "b", "c", "d", "e"], rows)
+
+    assert "Карта Карно:" in report
+    assert "a=0" in report
+    assert "a=1" in report
+    assert "bc\\de | 00 | 01 | 11 | 10" in report
+
+    assert "МДНФ (табличный метод)" in report
+    assert "МКНФ (табличный метод)" in report
+
+    assert "(e)" in report or "(X,X,X,X,1)" in report
+
+
+def test_karnaugh_method_rejects_unsupported_variable_count():
+    rows = []
+
+    for number in range(64):
         rows.append(
             type(
                 "Row",
@@ -118,7 +151,7 @@ def test_karnaugh_method_rejects_unsupported_variable_count():
                     "variable_values": {
                         name: bool((number >> shift) & 1)
                         for shift, name in enumerate(
-                            reversed(["a", "b", "c", "d", "e"])
+                            reversed(["a", "b", "c", "d", "e", "f"])
                         )
                     },
                     "intermediate_values": {},
@@ -127,8 +160,8 @@ def test_karnaugh_method_rejects_unsupported_variable_count():
             )()
         )
 
-    assert minimize_karnaugh_method(["a", "b", "c", "d", "e"], rows) == (
-        "Карта Карно поддерживается только для 2-4 переменных."
+    assert minimize_karnaugh_method(["a", "b", "c", "d", "e", "f"], rows) == (
+        "Карта Карно поддерживается только для 2-5 переменных."
     )
 
 
