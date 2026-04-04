@@ -1,6 +1,6 @@
 from algebra.boolean_derivative import BooleanDerivative
 from core.expression import LogicalExpression
-from minimization.calculation_minimizer import (
+from minimization import (
     minimize_calculation_method,
     minimize_calculation_tabular_method,
     minimize_karnaugh_method,
@@ -315,6 +315,7 @@ def handle_expression(expression: LogicalExpression) -> str:
 
     intermediate_expressions, rows = table_generator.generate(expression)
     variable_names = expression.variables()
+
     actions = {
         "1": lambda: print_truth_table(variable_names, intermediate_expressions, rows),
         "2": lambda: print_normal_forms(variable_names, rows, normal_form_builder),
