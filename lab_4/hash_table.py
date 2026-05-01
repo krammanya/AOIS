@@ -2,7 +2,6 @@ from dataclasses import dataclass
 from typing import Optional
 
 
-# Русский алфавит: А=0, Б=1, ..., Я=32
 ALPHABET = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ"
 
 TABLE_SIZE = 23
